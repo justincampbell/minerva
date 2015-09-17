@@ -1,0 +1,3 @@
+---
+- name: assemble local_settings.py
+  assemble: src={{geonodegp_settings}} dest={{geonodegp_root}}/geonodegp/local_settings.py

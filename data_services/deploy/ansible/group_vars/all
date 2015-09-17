@@ -70,3 +70,12 @@ geoserver_password: geoserver
 geonode_admin_user: admin
 geonode_admin_email: "{{ geonode_admin_user }}@geonode.com"
 geonode_admin_password: geonode
+
+# install path for geonodegp
+geonodegp_root: /home/vagrant/geonodegp
+
+# local_settings fragments path
+geonodegp_settings: "{{geonodegp_root}}/fragments"
+
+# path to data processing scripts
+data_queues_root: "{{geonodegp_root}}/data_queues"

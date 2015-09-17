@@ -1,0 +1,6 @@
+###
+# Installs geonode customizations from epidemico
+---
+
+- name: copy over sources
+  synchronize: src=geonodegp dest={{geonodegp_root}}

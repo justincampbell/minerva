@@ -7,4 +7,5 @@
      - nginx
      - uwsgi
      - geonode
+     - geonodegp
      - forecastio

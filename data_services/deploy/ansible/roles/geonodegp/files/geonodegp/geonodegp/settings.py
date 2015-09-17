@@ -23,6 +23,12 @@ import os
 from geonode.settings import *
 from celery.schedules import crontab
 
+# Load more settings from a file called local_settings.py if it exists
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
 #
 # General Django development settings
 #
@@ -57,10 +63,10 @@ LOCALE_PATHS = (
     os.path.join(LOCAL_ROOT, 'locale'),
     ) + LOCALE_PATHS
 
-INSTALLED_APPS = ('geonodegp',
-                  'geonodegp.data_queues',
-                  'geonodegp.data_queues.forecastio',
-                  'geonodegp.data_queues.gfms') + INSTALLED_APPS
+INSTALLED_APPS += ('geonodegp',
+                   'geonodegp.data_queues',
+                   'geonodegp.data_queues.forecastio',
+                   'geonodegp.data_queues.gfms') + INSTALLED_APPS
 
 TIME_ZONE = 'America/New_York'
 
@@ -102,12 +108,6 @@ CELERYBEAT_SCHEDULE = {
         'args': ()
     },
 }
-
-# Load more settings from a file called local_settings.py if it exists
-try:
-    from local_settings import *
-except ImportError:
-    pass
 
 # define the urls after the settings are overridden
 if 'geonode.geoserver' in INSTALLED_APPS:
