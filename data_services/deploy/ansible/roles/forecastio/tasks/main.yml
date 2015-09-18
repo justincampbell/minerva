@@ -1,6 +1,17 @@
 ###
 # Install forecastio data scraper
 ---
+- name: Copy data tasks to main app
+  synchronize: src=data_queues/ dest={{data_queues_root}}/
+
+- name: Add data scraping task
+  copy: src=forecastio_task.py dest={{geonodegp_tasks}}/
+  notify: assemble tasks definition
+
+- name: Add django settings
+  copy: src=forecastio_settings.py dest={{geonodegp_settings}}/
+  notify: assemble local_settings
+
 - name: Create the forecastio coverage store
   uri:
     url: "{{geoserver_rest}}/workspaces/{{geonode_workspace}}/coveragestores.json"
