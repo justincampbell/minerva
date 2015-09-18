@@ -1,6 +1,17 @@
 ###
 # Installs geonode customizations from epidemico
 ---
-
 - name: copy over sources
-  synchronize: src=geonodegp dest={{geonodegp_root}}
+  synchronize: src=geonodegp/ dest={{geonodegp_root}}
+  notify:
+    - assemble local_settings
+    - assemble tasks definition
+    - collectstatic in geonodegp
+
+- name: rename the vassals-default.ini file to the app name
+  file: src=/etc/uwsgi/vassals-default.skel dest=/etc/uwsgi/geonodegp.ini owner=www-data group=www-data state=link
+  notify: restart uwsgi
+  sudo: yes
+
+- name: install requirements
+  pip: virtualenv={{virtualenv_dir}}/{{app_name}} requirements={{geonodegp_root}}/requirements.txt chdir={{geonodegp_root}}

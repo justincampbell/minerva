@@ -1,3 +1,12 @@
 ---
-- name: assemble local_settings.py
+- name: assemble local_settings
   assemble: src={{geonodegp_settings}} dest={{geonodegp_root}}/geonodegp/local_settings.py
+
+- name: assemble tasks definition
+  assemble: src={{geonodegp_tasks}} dest={{data_queues_root}}/tasks.py
+
+- name: collectstatic in geonodegp
+  django_manage: command=collectstatic
+                 app_path={{geonodegp_root}}
+                 virtualenv={{virtualenv_dir}}/{{app_name}}
+                 settings=geonodegp.settings

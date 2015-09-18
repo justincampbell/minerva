@@ -21,13 +21,17 @@
 # Django settings for the GeoNode project.
 import os
 from geonode.settings import *
-from celery.schedules import crontab
 
 # Load more settings from a file called local_settings.py if it exists
+_ = INSTALLED_APPS
+INSTALLED_APPS = None
 try:
     from local_settings import *
 except ImportError:
     pass
+
+if INSTALLED_APPS:
+    INSTALLED_APPS = _ + INSTALLED_APPS
 
 #
 # General Django development settings
@@ -64,9 +68,7 @@ LOCALE_PATHS = (
     ) + LOCALE_PATHS
 
 INSTALLED_APPS += ('geonodegp',
-                   'geonodegp.data_queues',
-                   'geonodegp.data_queues.forecastio',
-                   'geonodegp.data_queues.gfms') + INSTALLED_APPS
+                   'geonodegp.data_queues')
 
 TIME_ZONE = 'America/New_York'
 
@@ -96,18 +98,19 @@ RSYNC_WAIT_TIME = 0
 HEALTHMAP_AUTH = 'Enter_your_API_key'
 
 #Add more scheduled geoprocessors here (ideally in local_settings.py file)
-CELERYBEAT_SCHEDULE = {
-    'gfms': {
-        'task': 'geonodegp.data_queues.gfms.tasks.gfms_task',
-        'schedule': crontab(minute='3'),
-        'args': ()
-    },
-    'forecast_io': {
-        'task': 'geonodegp.data_queues.forecastio.tasks.forecast_io_task',
-        'schedule': crontab(minute='1'),
-        'args': ()
-    },
-}
+#CELERYBEAT_SCHEDULE = {
+#    'gfms': {
+#        'task': 'geonodegp.data_queues.gfms.tasks.gfms_task',
+#        'schedule': crontab(minute='3'),
+#        'args': ()
+#    },
+#    'forecast_io': {
+#        'task': 'geonodegp.data_queues.forecastio.tasks.forecast_io_task',
+#        'schedule': crontab(minute='1'),
+#        'args': ()
+#    },
+#}
+
 
 # define the urls after the settings are overridden
 if 'geonode.geoserver' in INSTALLED_APPS:

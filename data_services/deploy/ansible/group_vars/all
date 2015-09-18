@@ -75,7 +75,10 @@ geonode_admin_password: geonode
 geonodegp_root: /home/vagrant/geonodegp
 
 # local_settings fragments path
-geonodegp_settings: "{{geonodegp_root}}/fragments"
+geonodegp_settings: "{{geonodegp_root}}/fragments/settings"
+
+# tasks fragments path
+geonodegp_tasks: "{{geonodegp_root}}/fragments/tasks"
 
 # path to data processing scripts
-data_queues_root: "{{geonodegp_root}}/data_queues"
+data_queues_root: "{{geonodegp_root}}/geonodegp/data_queues"
