@@ -13,5 +13,10 @@
   notify: restart uwsgi
   sudo: yes
 
+- name: Replace default geonode app
+  lineinfile: dest=/etc/nginx/sites-available/default regexp='^(.*unix:///tmp/)geonode(\.sock.*)$' line='\1geonodegp\2' backrefs=yes
+  notify: restart nginx
+  sudo: yes
+
 - name: install requirements
   pip: virtualenv={{virtualenv_dir}}/{{app_name}} requirements={{geonodegp_root}}/requirements.txt chdir={{geonodegp_root}}

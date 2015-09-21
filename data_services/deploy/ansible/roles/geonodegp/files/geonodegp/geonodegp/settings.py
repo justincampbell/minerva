@@ -30,8 +30,10 @@ try:
 except ImportError:
     pass
 
-if INSTALLED_APPS:
-    INSTALLED_APPS = _ + INSTALLED_APPS
+if INSTALLED_APPS is None:
+    INSTALLED_APPS = ()
+
+INSTALLED_APPS = _ + INSTALLED_APPS
 
 #
 # General Django development settings
