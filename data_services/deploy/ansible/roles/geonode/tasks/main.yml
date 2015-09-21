@@ -103,6 +103,8 @@
                  template='template0'
   sudo: yes
   sudo_user: postgres
+  retries: 2
+  delay: 5
 
 - name: create {{db_data_instance}} db
   postgresql_db: name={{db_data_instance}}
@@ -113,6 +115,8 @@
                  template='template0'
   sudo: yes
   sudo_user: postgres
+  retries: 2
+  delay: 5
 
 - name: add postgis to the {{db_data_instance}} db
   postgresql_ext: name=postgis db={{db_data_instance}}
