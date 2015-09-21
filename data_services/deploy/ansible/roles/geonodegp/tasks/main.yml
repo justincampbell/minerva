@@ -20,3 +20,11 @@
 
 - name: install requirements
   pip: virtualenv={{virtualenv_dir}}/{{app_name}} requirements={{geonodegp_root}}/requirements.txt chdir={{geonodegp_root}}
+
+- name: create work directory
+  file: path=/home/{{deploy_user}}/epigeonode state=directory
+
+- name: install supervisor config for workers
+  template: src=celery.conf dest=/etc/supervisor/conf.d/ owner=root group=root mode=0644
+  sudo: yes
+  notify: restart supervisord

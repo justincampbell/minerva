@@ -11,8 +11,6 @@ from django.conf import settings
 from geonode.geoserver.helpers import ogc_server_settings
 from geonode.geoserver.management.commands.updatelayers import Command as UpdateLayersCommand
 
-logger = logging.getLogger("epidemico.geoprocessors.processors")
-
 DEFAULT_WORKSPACE = getattr(settings, 'DEFAULT_WORKSPACE', 'geonode')
 GS_DATA_DIR = getattr(settings, 'GS_DATA_DIR', '/data/geodata')
 

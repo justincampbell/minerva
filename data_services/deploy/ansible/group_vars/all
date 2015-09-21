@@ -47,6 +47,9 @@ deploy_user: vagrant
 # server directory for the virtualenv that will be created to run the web app
 virtualenv_dir: /home/{{deploy_user}}/venvs
 
+# place where virtualenv binaries are stored
+virtualenv_bin: "{{virtualenv_dir}}/{{app_name}}/bin"
+
 # server directory to put the code into that is pulled from the code
 # repository
 app_code_dir: /home/{{deploy_user}}
