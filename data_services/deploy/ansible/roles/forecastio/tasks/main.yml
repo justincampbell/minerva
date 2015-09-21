@@ -44,14 +44,9 @@
     chdir: "{{app_code_dir}}/{{app_name}}"
 
 - name: Use curl to add forecastio image mosaic
-  command: curl -v --data-binary @forecastio.zip -XPUT -u {{geoserver_user}}:{{geoserver_password}} -H "Content-Type:application/zip" {{geoserver_rest}}/workspaces/{{db_data_instance}}/coveragestores/forecast_io_airtemp/file.imagemosaic 
+  command: curl -f -v --data-binary @forecastio.zip -XPUT -u {{geoserver_user}}:{{geoserver_password}} -H "Content-Type:application/zip" {{geoserver_rest}}/workspaces/{{db_data_instance}}/coveragestores/forecast_io_airtemp/file.imagemosaic
   args:
     chdir: "{{app_code_dir}}/{{app_name}}"
 
 - name: Generate coverage configuration
   template: src=coverage.json.j2 dest={{app_code_dir}}/{{app_name}}/coverage.json
-
-- name: Create coverage
-  command: curl -v -f --data @coverage.json -XPOST -u {{geoserver_user}}:{{geoserver_password}} -H Content-Type:application/json {{geoserver_rest}}/workspaces/{{db_data_instance}}/coveragestores/forecast_io_airtemp/coverages.json
-  args:
-    chdir: "{{app_code_dir}}/{{app_name}}"
