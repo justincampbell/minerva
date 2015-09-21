@@ -2,6 +2,7 @@
   remote_user: vagrant
   roles:
      - common
+     - zenoamaro.supervisord
      - postgres_postgis
      - geoserver
      - nginx
