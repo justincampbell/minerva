@@ -89,7 +89,7 @@ CELERY_ENABLE_REMOTE_CONTROL = True
 # Email address for logging in to GPM FTP server
 GPM_ACCOUNT = 'Enter your GPM email address'
 #Location of GeoServer data directory
-GS_DATA_DIR = '/usr/share/geoserver/data'
+GS_DATA_DIR = '/var/lib/tomcat7/webapps/geoserver/data'
 #Directory where temporary data_queues geoprocessing files should be downloaded
 GS_TMP_DIR = GS_DATA_DIR + '/tmp'
 #Time to wait before updating Geoserver mosaic (keep at 0 unless Geoserver is on a different server.

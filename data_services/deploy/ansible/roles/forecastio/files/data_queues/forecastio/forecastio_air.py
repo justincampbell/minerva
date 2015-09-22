@@ -10,7 +10,6 @@ from ..processor_base import GeoDataMosaicProcessor
 from ..helpers import gdal_translate
 
 logger = logging.getLogger("epidemico.geoprocessors.processors")
-logger.addHandler(logging.FileHandler('/tmp/forecastio.log'))
 
 GS_DATA_DIR = getattr(settings, 'GS_DATA_DIR', '/data/geodata')
 

@@ -25,6 +25,7 @@
     body: '{"coverageStore": {"enabled": true, "name": "forecast_io_airtemp", "type": "ImageMosaic", "workspace": "{{db_data_instance}}"}}'
     body_format: json
   ignore_errors: true
+  notify: reset geoserver permissions
 
 - name: Copy airtemp tif
   copy: src=forecast_io_airtemp_20150810T130000000Z.tif dest={{app_code_dir}}/{{app_name}}/
@@ -47,6 +48,7 @@
   command: curl -v --data-binary @forecastio.zip -XPUT -u {{geoserver_user}}:{{geoserver_password}} -H "Content-Type:application/zip" {{geoserver_rest}}/workspaces/{{db_data_instance}}/coveragestores/forecast_io_airtemp/file.imagemosaic
   args:
     chdir: "{{app_code_dir}}/{{app_name}}"
+  notify: reset geoserver permissions
 
 - name: Generate coverage configuration
   template: src=coverage.json.j2 dest={{app_code_dir}}/{{app_name}}/coverage.json

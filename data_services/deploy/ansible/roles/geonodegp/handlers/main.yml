@@ -10,3 +10,7 @@
                  app_path={{geonodegp_root}}
                  virtualenv={{virtualenv_dir}}/{{app_name}}
                  settings=geonodegp.settings
+
+- name: reset geoserver permissions
+  file: path=/var/lib/tomcat7/webapps/geoserver/data recurse=yes owner=tomcat7 group=tomcat7 state=directory mode=g+rws
+  sudo: yes

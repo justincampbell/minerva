@@ -7,6 +7,11 @@
     - assemble local_settings
     - assemble tasks definition
     - collectstatic in geonodegp
+    - reset geoserver permissions
+
+- name: add user to tomcat7 group
+  user: name={{deploy_user}} append=yes groups=tomcat7
+  sudo: yes
 
 - name: rename the vassals-default.ini file to the app name
   file: src=/etc/uwsgi/vassals-default.skel dest=/etc/uwsgi/geonodegp.ini owner=www-data group=www-data state=link
@@ -22,7 +27,7 @@
   pip: virtualenv={{virtualenv_dir}}/{{app_name}} requirements={{geonodegp_root}}/requirements.txt chdir={{geonodegp_root}}
 
 - name: create work directory
-  file: path=/home/{{deploy_user}}/epigeonode state=directory
+  file: path=/home/{{deploy_user}}/epigeonode state=directory mode=1775
 
 - name: install supervisor config for workers
   template: src=celery.conf dest=/etc/supervisor/conf.d/ owner=root group=root mode=0644
