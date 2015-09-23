@@ -6,11 +6,15 @@
 
 - name: Add data scraping task
   copy: src=forecastio_task.py dest={{geonodegp_tasks}}/
-  notify: assemble tasks definition
+  notify:
+    - assemble tasks definition
+    - restart supervisord
 
 - name: Add django settings
   copy: src=forecastio_settings.py dest={{geonodegp_settings}}/
-  notify: assemble local_settings
+  notify:
+    - assemble local_settings
+    - restart supervisord
 
 - name: Create the forecastio coverage store
   uri:

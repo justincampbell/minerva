@@ -32,4 +32,6 @@
 - name: install supervisor config for workers
   template: src=celery.conf dest=/etc/supervisor/conf.d/ owner=root group=root mode=0644
   sudo: yes
-  notify: restart supervisord
+  notify:
+    - reread supervisord
+    - restart supervisord
